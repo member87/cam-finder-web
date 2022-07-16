@@ -19,6 +19,7 @@ const store = useStore();
           <th class="py-3 px-6">
             Mail
           </th>
+
         </tr>
       </thead>
       <tbody>

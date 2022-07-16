@@ -24,12 +24,21 @@ store.info = reactive({
 
 (async function() {
   let res = await axios.get(route('api.users', `${props.data.ip}:${props.data.port}`));
-  store.info.users = res.data.UserConfig.Users.User;
+  const users = res.data.UserConfig.Users.User;
+  if (users[0])
+    store.info.users = users;
+  else
+    store.info.users[0] = users;
+  
 })();
 
 (async function() {
   let res = await axios.get(route('api.storage', `${props.data.ip}:${props.data.port}`));
-  store.info.storages = res.data.Drive;
+  const storages = res.data.Drive;
+  if (storages[0])
+    store.info.storages = res.data.Drive;
+  else
+    store.info.storages[0] = res.data.Drive;
 })();
 
 (async function() {
@@ -59,13 +68,10 @@ onMounted(() => {
    
 
     <div class="grid grid-cols-2">
-      <div v-if="store.info.storages[0]">
+      <div>
         <div v-for="storage in store.info.storages">
           <StorageDevice :data="storage" />
         </div>
-      </div>
-      <div v-else>
-        <StorageDevice v-if="store.info.storages.CodeName" :data="store.info.storages" />
       </div>
       <UserTable />
     </div>

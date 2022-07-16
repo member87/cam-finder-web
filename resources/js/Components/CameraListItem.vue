@@ -19,6 +19,9 @@ function showOnMap(lat, long) {
 <template>
 
       <td class="px-6 py-4">
+        {{data.id}}
+      </td>
+      <td class="px-6 py-4">
         {{data.ip}}:{{data.port}}
       </td>
       <td class="px-6 py-4">

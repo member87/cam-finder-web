@@ -41,7 +41,7 @@ class CameraController extends Controller
   public function storage($ip)
   {
     $response = http::withheaders([
-      'authorization' => 'Basic YWRtaW46MTIzNDU2',
+      'Authorization' => 'Basic YWRtaW46MTIzNDU2',
     ])->get('http://' . $ip . '/Media/Storage/getDrive');
 
     $xml = simplexml_load_string($response);
@@ -53,7 +53,7 @@ class CameraController extends Controller
   public function connectedUsers($ip)
   {
     $response = http::withheaders([
-      'authorization' => 'Basic YWRtaW46MTIzNDU2',
+      'Authorization' => 'Basic YWRtaW46MTIzNDU2',
     ])->get('http://' . $ip . '/Media/UserGroup/getOnlineUserList');
 
     $xml = simplexml_load_string($response);

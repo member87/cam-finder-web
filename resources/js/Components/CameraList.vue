@@ -13,6 +13,9 @@ console.log(store.data.links.filter((v, i) => i > 0 && i < store.data.links.leng
         <thead class="text-xs text-gray-200 uppercase bg-neutral-700">
             <tr>
                 <th scope="col" class="px-6 py-3">
+                    ID
+                </th>
+                <th scope="col" class="px-6 py-3">
                     Ip / Port
                 </th>
                 <th scope="col" class="px-6 py-3">
