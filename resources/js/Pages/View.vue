@@ -17,10 +17,10 @@ const props = defineProps({
 store.cameraList.push(props.data)
 
 store.info = reactive({
-    users: [],
-    storages: [],
-    cameras: [],
-    connected: 0,
+    users: -1,
+    storages: -1,
+    cameras: -1,
+    connected: -1,
   });
 
 (async function() {
@@ -28,9 +28,10 @@ store.info = reactive({
   const users = res.data.UserConfig.Users.User;
   if (users[0])
     store.info.users = users;
-  else
+  else {
+    store.info.users = []
     store.info.users[0] = users;
-  
+  }  
 })();
 
 (async function() {
@@ -38,8 +39,10 @@ store.info = reactive({
   const storages = res.data.Drive;
   if (storages[0])
     store.info.storages = res.data.Drive;
-  else
+  else {
+    store.info.storages = []
     store.info.storages[0] = res.data.Drive;
+  }
 })();
 
 (async function() {
@@ -49,18 +52,25 @@ store.info = reactive({
 
 (async function() {
   let res = await axios.get(route('api.connected', `${props.data.ip}:${props.data.port}`));
-  store.info.connected = res.data.Users.User;
+  if (res.data.Users.User)
+    store.info.connected = res.data.Users.User;
+  else
+    store.info.connected = []
 })();
 
 onMounted(() => {
     store.map.setView([props.data.lat, props.data.long], 10);
   })
 
+
 </script>
 
 <template>
   
-  <div class="bg-zinc-900 min-h-screen h-full">
+  <div class="bg-zinc-900 min-h-screen h-full pt-2 text-white">
+    <div class="px-2">
+      <button onclick="history.back()" class="py-2 px-3 bg-zinc-700 rounded"><i class="fa-solid fa-arrow-left mx-1"></i> Back</button>
+    </div>
     <div class="flex w-screen">
       <Map />
   
@@ -74,7 +84,7 @@ onMounted(() => {
    
 
     <div class="grid grid-cols-2">
-      <div>
+      <div v-if="typeof store.info.storages == 'object'">
         <div v-for="storage in store.info.storages">
           <StorageDevice :data="storage" />
         </div>

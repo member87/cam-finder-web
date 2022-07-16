@@ -14,7 +14,8 @@ const props = defineProps({
 });
 
 function shouldRender() {
-    if (store.info[props.id].length || store.info[props.id].CodeName || store.info[props.id].Mail) {
+    console.log(props.id, store.info[props.id])
+    if (store.info[props.id].length) {
       return true;
     } else {
        return false;   

@@ -20,15 +20,21 @@ const store = useStore();
             Mail
           </th>
 
+          <th class="py-3 px-6">
+            Group
+          </th>
         </tr>
       </thead>
-      <tbody>
+      <tbody v-if="typeof store.info.users == 'object'">
         <tr class="bg-neutral-600/50 border-b border-neutral-600 text-white" v-for="user in store.info.users">
           <th class="py-4 px-6">
             {{user.Name}}
           </th>
           <td class="py-4 px-6">
             {{ (user.Mail.length == 0) ? "N/A" : user.Mail}}
+          </td>
+          <td class="py-4 px-6">
+            {{user.UserGroups.UserGroup.id}}
           </td>
         </tr>
       </tbody>
