@@ -43,10 +43,8 @@ class CameraController extends Controller
     $response = http::withheaders([
       'Authorization' => 'Basic YWRtaW46MTIzNDU2',
     ])->get('http://' . $ip . '/Media/Storage/getDrive');
-
     $xml = simplexml_load_string($response);
     $json = json_encode($xml);
-
     return $json;
   }
 
@@ -55,10 +53,19 @@ class CameraController extends Controller
     $response = http::withheaders([
       'Authorization' => 'Basic YWRtaW46MTIzNDU2',
     ])->get('http://' . $ip . '/Media/UserGroup/getOnlineUserList');
-
     $xml = simplexml_load_string($response);
     $json = json_encode($xml);
+    return $json;
+  }
 
+
+  public function connected($ip)
+  {
+    $response = http::withheaders([
+      'Authorization' => 'Basic YWRtaW46MTIzNDU2',
+    ])->get('http://' . $ip . '/Media/UserGroup/getOnlineUserList');
+    $xml = simplexml_load_string($response);
+    $json = json_encode($xml);
     return $json;
   }
 

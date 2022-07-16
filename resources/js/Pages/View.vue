@@ -19,7 +19,8 @@ store.cameraList.push(props.data)
 store.info = reactive({
     users: [],
     storages: [],
-    cameras: []
+    cameras: [],
+    connected: 0,
   });
 
 (async function() {
@@ -46,6 +47,11 @@ store.info = reactive({
   store.info.cameras = res.data.DeviceConfig.Devices.Device;
 })();
 
+(async function() {
+  let res = await axios.get(route('api.connected', `${props.data.ip}:${props.data.port}`));
+  store.info.connected = res.data.Users.User;
+})();
+
 onMounted(() => {
     store.map.setView([props.data.lat, props.data.long], 10);
   })
@@ -62,7 +68,7 @@ onMounted(() => {
         <ViewInfoBox id="users" text="Users" icon="fa-users" color="bg-amber-300" />
         <ViewInfoBox id="cameras" text="Cameras" icon="fa-camera" color="bg-rose-300"/>
         <ViewInfoBox id="storages" text="Storage Devices" icon="fa-download" color="bg-cyan-400"/>
-        <ViewInfoBox id="storages" text="Storage Devices" icon="fa-download" color="bg-purple-400"/>
+        <ViewInfoBox id="connected" text="Connected Users" icon="fa-network-wired" color="bg-purple-400"/>
       </div>
     </div>
    
