@@ -23,8 +23,23 @@ store.info = reactive({
     connected: -1,
   });
 
+async function xmlToJson(xmlString) {
+  return await axios.post(route('api.xml2json'), {
+      xml: xmlString
+    })
+}
+
+
+async function makeRequest(url) {
+  return await axios.get(`http://${props.data.ip}:${props.data.port}/${url}`, {
+     headers: {
+     'Authorization': `Basic YWRtaW46MTIzNDU2`
+    }
+  });
+}
+
 (async function() {
-  let res = await axios.get(route('api.users', `${props.data.ip}:${props.data.port}`));
+  let res = await makeRequest('Media/UserGroup/getUser?response_format=json');
   const users = res.data.UserConfig.Users.User;
   if (users[0])
     store.info.users = users;
@@ -35,7 +50,8 @@ store.info = reactive({
 })();
 
 (async function() {
-  let res = await axios.get(route('api.storage', `${props.data.ip}:${props.data.port}`));
+  let res = await makeRequest('Media/Storage/getDrive');
+  res = await xmlToJson(res.data)
   const storages = res.data.Drive;
   if (storages[0])
     store.info.storages = res.data.Drive;
@@ -46,12 +62,13 @@ store.info = reactive({
 })();
 
 (async function() {
-  let res = await axios.get(route('api.cameras', `${props.data.ip}:${props.data.port}`));
+  let res = await makeRequest(`Media/Device/getDevice?response_format=json`)
   store.info.cameras = res.data.DeviceConfig.Devices.Device;
 })();
 
 (async function() {
-  let res = await axios.get(route('api.connected', `${props.data.ip}:${props.data.port}`));
+  let res = await makeRequest('Media/UserGroup/getOnlineUserList');
+  res = await xmlToJson(res.data)
   const connected = res.data.Users.User
   if (connected && connected[0])
     store.info.connected = res.data.Users.User;

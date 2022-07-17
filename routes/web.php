@@ -22,8 +22,5 @@ Route::get('/view/{id}', [CameraController::class, "show"])->name('view.camera')
 
 
 
-Route::get('/api/users/{ip}', [CameraController::class, "users"])->name('api.users');
-Route::get('/api/storage/{ip}', [CameraController::class, "storage"])->name('api.storage');
-Route::get('/api/cameras/{ip}', [CameraController::class, "cameras"])->name('api.cameras');
-Route::get('/api/connected/{ip}', [CameraController::class, "connected"])->name('api.connected');
+Route::post('/api/xml2json/', [CameraController::class, "xml2json"])->name('api.xml2json');
 

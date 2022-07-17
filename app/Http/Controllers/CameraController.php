@@ -22,49 +22,10 @@ class CameraController extends Controller
     ]); 
   }
 
-  public function users($ip)
+  public function xml2json(Request $request)
   {
-    $response = Http::withHeaders([
-      'Authorization' => 'Basic YWRtaW46MTIzNDU2',
-    ])->get('http://' . $ip . '/Media/UserGroup/getUser?response_format=json');
-    return $response;
-  }
 
-  public function cameras($ip)
-  {
-    $response = Http::withHeaders([
-      'Authorization' => 'Basic YWRtaW46MTIzNDU2',
-    ])->get('http://' . $ip . '/Media/Device/getDevice?response_format=json');
-    return $response;
-  }
-
-  public function storage($ip)
-  {
-    $response = http::withheaders([
-      'Authorization' => 'Basic YWRtaW46MTIzNDU2',
-    ])->get('http://' . $ip . '/Media/Storage/getDrive');
-    $xml = simplexml_load_string($response);
-    $json = json_encode($xml);
-    return $json;
-  }
-
-  public function connectedUsers($ip)
-  {
-    $response = http::withheaders([
-      'Authorization' => 'Basic YWRtaW46MTIzNDU2',
-    ])->get('http://' . $ip . '/Media/UserGroup/getOnlineUserList');
-    $xml = simplexml_load_string($response);
-    $json = json_encode($xml);
-    return $json;
-  }
-
-
-  public function connected($ip)
-  {
-    $response = http::withheaders([
-      'Authorization' => 'Basic YWRtaW46MTIzNDU2',
-    ])->get('http://' . $ip . '/Media/UserGroup/getOnlineUserList');
-    $xml = simplexml_load_string($response);
+    $xml = simplexml_load_string($request->input('xml'));
     $json = json_encode($xml);
     return $json;
   }
