@@ -52,10 +52,13 @@ store.info = reactive({
 
 (async function() {
   let res = await axios.get(route('api.connected', `${props.data.ip}:${props.data.port}`));
-  if (res.data.Users.User)
+  const connected = res.data.Users.User
+  if (connected && connected[0])
     store.info.connected = res.data.Users.User;
-  else
+  else{
     store.info.connected = []
+    store.info.connected[0] = res.data.Users.User;
+  }
 })();
 
 onMounted(() => {
@@ -68,8 +71,9 @@ onMounted(() => {
 <template>
   
   <div class="bg-zinc-900 min-h-screen h-full pt-2 text-white">
-    <div class="px-2">
+    <div class="px-2 flex">
       <button onclick="history.back()" class="py-2 px-3 bg-zinc-700 rounded"><i class="fa-solid fa-arrow-left mx-1"></i> Back</button>
+      <div class="ml-5 pt-1.5 text-2xl tracking-wide">{{props.data.ip}}:{{props.data.port}}</div>
     </div>
     <div class="flex w-screen">
       <Map />
