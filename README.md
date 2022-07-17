@@ -1,4 +1,4 @@
-# ⚠️ This is still in development, is missing features and propbably quite buggy ⚠️
+# ⚠️ This is still in development, missing features and probably quite buggy ⚠️
 
 This is a website to view cameras that have been found by [cam-finder](https://github.com/member87/cam-finder)
 
