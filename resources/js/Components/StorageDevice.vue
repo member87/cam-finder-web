@@ -18,7 +18,7 @@ const percentage = used/(props.data.TotalSize/1024)
     <div class="w-full pl-4 relative">
       {{data.CodeName}}\ 
 
-      <span class="text-sm right-0 absolute">{{Math.round(used)}}GB / {{Math.round(data.TotalSize/1024)}}GB</span>
+      <span class="text-sm right-0 absolute">{{Math.round(used).toLocaleString()}} GB / {{Math.round(data.TotalSize/1024).toLocaleString()}} GB</span>
       <div class="w-100 bg-neutral-600/50 h-2 rounded-full overflow-hidden">
         <div class="h-full bg-red-900/50" :style="{width: percentage*100 + '%'}"></div>
       </div>

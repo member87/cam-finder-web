@@ -14,7 +14,6 @@ const props = defineProps({
 });
 
 function shouldRender() {
-    console.log(props.id, store.info[props.id])
     if (store.info[props.id].length) {
       return true;
     } else {
