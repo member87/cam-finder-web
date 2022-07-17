@@ -4,7 +4,7 @@ namespace App\Console\Commands;
 
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Storage;
-use App\Models\Cameras;
+use App\Models\Camera;
 
 class UpdateDatabase extends Command
 {
@@ -33,7 +33,7 @@ class UpdateDatabase extends Command
       $cams = array_slice(explode("\n", $file), 1);
       foreach($cams as $cam) {
         $cam = explode(',', $cam);
-        Cameras::create([
+        Camera::create([
           'ip' => $cam[0],
           'port' => $cam[1],
           'count' => $cam[3],
