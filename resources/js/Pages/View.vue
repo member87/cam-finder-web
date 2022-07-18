@@ -91,10 +91,10 @@ onMounted(() => {
       <button onclick="history.back()" class="py-2 px-3 bg-zinc-700 rounded"><i class="fa-solid fa-arrow-left mx-1"></i> Back</button>
       <div class="ml-5 pt-1.5 text-2xl tracking-wide">{{props.data.ip}}:{{props.data.port}}</div>
     </div>
-    <div class="flex w-screen">
+    <div class="flex w-full">
       <Map />
   
-      <div class="flex justify-between flex-col my-2 mr-2 w-1/5">
+      <div class="flex justify-between flex-col my-2 mx-1 w-1/5">
         <ViewInfoBox id="users" text="Users" icon="fa-users" color="bg-amber-300" />
         <ViewInfoBox id="cameras" text="Cameras" icon="fa-camera" color="bg-rose-300"/>
         <ViewInfoBox id="storages" text="Storage Devices" icon="fa-download" color="bg-cyan-400"/>
