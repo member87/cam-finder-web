@@ -15,7 +15,6 @@ let hasSlot = () => {
   }
 
 function toggleModal() {
-    console.log("aa")
     showModal.value = !showModal.value
   }
 
@@ -53,7 +52,7 @@ function render() {
       <span v-if="shouldRender()" class="text-gray-700 text-4xl">
         {{render()}}
       </span>
-      <button @click="toggleModal" class="absolute top-1 right-1 text-xl text-slate-100" v-if="hasSlot()"><i class="fa-solid fa-circle-info"></i></button>
+      <button @click="toggleModal" class="absolute top-1 right-1 text-xl text-slate-100" v-if="hasSlot() && shouldRender()"><i class="fa-solid fa-circle-info"></i></button>
     </div>
   </div>
 
