@@ -115,13 +115,17 @@ onMounted(() => {
 
 
     <div class="grid grid-cols-1 lg:grid-cols-2">
-      <div v-if="typeof store.info.storages == 'object'">
-        <div v-for="storage in store.info.storages">
-          <StorageDevice :data="storage" />
+      <div>
+        <div v-if="typeof store.info.storages == 'object'">
+          <div v-for="storage in store.info.storages">
+            <StorageDevice :data="storage" />
+          </div>
         </div>
+        <CameraDeviceList :data="data" />
       </div>
-      <UserTable />
-      <CameraDeviceList :data="data" />
+      <div>
+        <UserTable />
+      </div>
     </div>
   </div>
 </template>

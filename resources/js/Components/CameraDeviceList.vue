@@ -3,6 +3,7 @@
 import axios from 'axios'
 import { useStore } from '@/Stores/cameras'
 import { ref, defineProps } from 'vue'
+import Spinner from '@/Components/Spinner.vue'
 
 const store = useStore();
 
@@ -12,6 +13,8 @@ let props = defineProps({
 
 let imgData = ref("")
 let modalOpen = ref(0);
+let opening = ref(0)
+let openingId = ref(0)
 
 async function makeRequest(id) {
   return await axios.post(route('api.snapshot', {
@@ -22,9 +25,16 @@ async function makeRequest(id) {
 
 async function getSnapshot(id) {
     imgData.value = ""
-    let resp = await makeRequest(id);
-    imgData.value = `data:image/jpeg;base64, ${resp.data}`;
-    modalOpen.value = 1;
+    opening.value = 1;
+    openingId.value = id;
+    let resp;
+    try {
+      resp = await makeRequest(id);
+      imgData.value = `data:image/jpeg;base64, ${resp.data}`;
+    } finally {
+      modalOpen.value = 1;
+      opening.value = 0;
+    }
   }
 
 
@@ -47,7 +57,7 @@ async function getSnapshot(id) {
           </th>
         </tr>
       </thead>
-      <tbody v-if="typeof store.info.users == 'object'">
+      <tbody v-if="typeof store.info.cameras == 'object'">
         <tr class="bg-neutral-600/50 border-b border-neutral-600 text-white" v-for="cam in store.info.cameras">
           <td class="py-4 px-6">
             {{ cam.Name }}
@@ -56,7 +66,8 @@ async function getSnapshot(id) {
             {{ cam.SerialNumber }}
           </td>
           <td class="py-4 px-6">
-            <button @click="getSnapshot(cam.id)"><i class="fa-solid fa-eye"></i> view</button>
+            <Spinner color="#eee" v-if="opening && openingId == cam.id" />
+            <button @click="getSnapshot(cam.id)" v-if="!opening || openingId != cam.id"><i class="fa-solid fa-eye"></i> view</button>
           </td>
         </tr>
       </tbody>

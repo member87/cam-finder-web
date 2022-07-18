@@ -1,3 +1,17 @@
+<script setup>
+
+import { defineProps } from 'vue';
+
+let props = defineProps({
+    color: String,
+  })
+
+let col = "#333";
+if (props.color)
+  col = props.color;
+
+
+</script>
 <template>
 
 <div class="lds-dual-ring"></div>
@@ -19,7 +33,7 @@
   height: 50px;
   border-radius: 50%;
   border: 6px solid #111;
-  border-color: #333 transparent #333 transparent;
+  border-color: v-bind(col) transparent v-bind(col) transparent;
   animation: lds-dual-ring 1.2s linear infinite;
 }
 @keyframes lds-dual-ring {
