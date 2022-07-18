@@ -31,11 +31,10 @@ async function xmlToJson(xmlString) {
 
 
 async function makeRequest(url) {
-  return await axios.get(`http://${props.data.ip}:${props.data.port}/${url}`, {
-     headers: {
-     'Authorization': `Basic YWRtaW46MTIzNDU2`
-    }
-  });
+  return await axios.post(route('api.request', {
+    host: `${props.data.ip}:${props.data.port}`, 
+    path: url
+  }));
 }
 
 (async function() {

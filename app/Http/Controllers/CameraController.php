@@ -24,10 +24,18 @@ class CameraController extends Controller
 
   public function xml2json(Request $request)
   {
-
     $xml = simplexml_load_string($request->input('xml'));
     $json = json_encode($xml);
     return $json;
+  }
+
+  public function makeRequest(Request $request)
+  {
+    return http::withheaders([
+      'Authorization' => 'Basic YWRtaW46MTIzNDU2',
+    ])
+      ->timeout(5)
+      ->get('http://' . $request->input('host') . '/' . $request->input('path'));
   }
 
 }
