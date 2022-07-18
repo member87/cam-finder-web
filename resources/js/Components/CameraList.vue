@@ -8,7 +8,7 @@ console.log(store.data.links.filter((v, i) => i > 0 && i < store.data.links.leng
 </script>
 
 <template>
-  <div class="w-screen p-4">
+  <div class="w-full p-4">
     <table class="w-full text-sm text-left text-gray-500">
         <thead class="text-xs text-gray-200 uppercase bg-neutral-700">
             <tr>
