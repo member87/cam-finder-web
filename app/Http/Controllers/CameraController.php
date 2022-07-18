@@ -38,4 +38,8 @@ class CameraController extends Controller
       ->get('http://' . $request->input('host') . '/' . $request->input('path'));
   }
 
+  public function snapshot(Request $request) {
+    return base64_encode($this->makeRequest($request));
+  }
+
 }

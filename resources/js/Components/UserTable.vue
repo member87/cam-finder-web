@@ -27,9 +27,9 @@ const store = useStore();
       </thead>
       <tbody v-if="typeof store.info.users == 'object'">
         <tr class="bg-neutral-600/50 border-b border-neutral-600 text-white" v-for="user in store.info.users">
-          <th class="py-4 px-6">
+          <td class="py-4 px-6">
             {{user.Name}}
-          </th>
+          </td>
           <td class="py-4 px-6">
             {{ (user.Mail.length == 0) ? "N/A" : user.Mail}}
           </td>

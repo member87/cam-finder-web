@@ -6,6 +6,7 @@ import OnlineUserTable from '@/Components/OnlineUserTable.vue'
 import Map from '@/Components/Map.vue'
 import UserTable from '@/Components/UserTable.vue'
 import StorageDevice from '@/Components/StorageDevice.vue'
+import CameraDeviceList from '@/Components/CameraDeviceList.vue'
 import { useStore } from '@/Stores/cameras'
 import { reactive, onMounted } from 'vue';
 
@@ -120,6 +121,7 @@ onMounted(() => {
         </div>
       </div>
       <UserTable />
+      <CameraDeviceList :data="data" />
     </div>
   </div>
 </template>
