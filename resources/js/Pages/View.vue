@@ -2,6 +2,7 @@
 <script setup>
 import axios from 'axios'
 import ViewInfoBox from '@/Components/ViewInfoBox.vue'
+import OnlineUserTable from '@/Components/OnlineUserTable.vue'
 import Map from '@/Components/Map.vue'
 import UserTable from '@/Components/UserTable.vue'
 import StorageDevice from '@/Components/StorageDevice.vue'
@@ -85,25 +86,34 @@ onMounted(() => {
 </script>
 
 <template>
-  
+
   <div class="bg-zinc-900 min-h-screen h-full pt-2 text-white">
     <div class="px-2 flex">
       <button onclick="history.back()" class="py-2 px-3 bg-zinc-700 rounded"><i class="fa-solid fa-arrow-left mx-1"></i> Back</button>
       <div class="ml-5 pt-1.5 text-2xl tracking-wide">{{props.data.ip}}:{{props.data.port}}</div>
     </div>
-    <div class="flex flex-col w-full sm:flex-row">
+    <div class="flex flex-col w-full lg:flex-row">
       <Map />
-  
-      <div class="flex justify-between flex-col my-2 mx-1 w-full sm:w-1/5">
-        <ViewInfoBox id="users" text="Users" icon="fa-users" color="bg-amber-300" />
-        <ViewInfoBox id="cameras" text="Cameras" icon="fa-camera" color="bg-rose-300"/>
-        <ViewInfoBox id="storages" text="Storage Devices" icon="fa-download" color="bg-cyan-400"/>
-        <ViewInfoBox id="connected" text="Connected Users" icon="fa-network-wired" color="bg-purple-400"/>
-      </div>
-    </div>
-   
 
-    <div class="grid grid-cols-1 sm:grid-cols-2">
+        <div class="flex justify-between flex-col my-2 mx-1 w-auto lg:w-1/5">
+          <ViewInfoBox id="users" text="Users" icon="fa-users" color="bg-amber-300" />
+          <ViewInfoBox id="cameras" text="Cameras" icon="fa-camera" color="bg-rose-300"/>
+          <ViewInfoBox id="storages" text="Storage Devices" icon="fa-download" color="bg-cyan-400"/>
+          <ViewInfoBox id="connected" text="Connected Users" icon="fa-network-wired" color="bg-purple-400">
+            <template v-slot:default="{ close }">
+              <div class="z-50 bg-zinc-900/90 fixed top-0 left-0 w-screen h-screen flex flex-col justify-center items-center">
+                <div class="w-3/4 relative">
+                  <OnlineUserTable class="shadow" />
+                  <button @click="close" class="bg-primary text-xl px-4 py-2 rounded shadow absolute right-0 m-2"><i class="fa-solid fa-xmark mr-1"></i> close</button>
+                </div>
+              </div>
+          </template>
+          </ViewInfoBox>
+        </div>
+    </div>
+
+
+    <div class="grid grid-cols-1 lg:grid-cols-2">
       <div v-if="typeof store.info.storages == 'object'">
         <div v-for="storage in store.info.storages">
           <StorageDevice :data="storage" />

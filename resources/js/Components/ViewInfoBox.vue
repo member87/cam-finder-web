@@ -1,10 +1,24 @@
 <script setup>
 import axios from 'axios'
 import { useStore } from '@/Stores/cameras'
-import { ref, onMounted } from 'vue';
+import { ref, onMounted, useSlots } from 'vue';
 import Spinner from '@/Components/Spinner.vue'
 
+
 const store = useStore();
+let showModal = ref(false);
+const slots = useSlots()
+
+
+let hasSlot = () => {
+    return !!slots.default
+  }
+
+function toggleModal() {
+    console.log("aa")
+    showModal.value = !showModal.value
+  }
+
 
 const props = defineProps({
   text: String,
@@ -39,7 +53,12 @@ function render() {
       <span v-if="shouldRender()" class="text-gray-700 text-4xl">
         {{render()}}
       </span>
+      <button @click="toggleModal" class="absolute top-1 right-1 text-xl text-slate-100" v-if="hasSlot()"><i class="fa-solid fa-circle-info"></i></button>
     </div>
+  </div>
+
+  <div v-if="showModal" @close="toggleModal">
+    <slot :close="toggleModal" ></slot>
   </div>
 </template>
 

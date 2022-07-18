@@ -61,7 +61,7 @@ export default {
 </script>
 
 <template>
-  <div class="p-3 w-full">
+  <div class="p-3 w-full z-30">
     <div id="map"></div>
   </div>
 </template>
