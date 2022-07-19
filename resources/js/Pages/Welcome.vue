@@ -2,6 +2,7 @@
 import { Head, Link } from '@inertiajs/inertia-vue3';
 import CameraList from '@/Components/CameraList.vue';
 import Map from '@/Components/Map.vue';
+import Layout from '@/Layouts/Layout.vue'
 import { useStore } from '@/Stores/cameras'
 
 const store = useStore()
@@ -20,9 +21,9 @@ store.data = props.data;
     <Head title="Welcome" />
   
     
-    <div class="bg-zinc-900">
+    <Layout>
       <Map />
 
       <CameraList />
-    </div>
+    </Layout>
 </template>

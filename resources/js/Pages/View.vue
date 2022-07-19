@@ -7,6 +7,7 @@ import Map from '@/Components/Map.vue'
 import UserTable from '@/Components/UserTable.vue'
 import StorageDevice from '@/Components/StorageDevice.vue'
 import CameraDeviceList from '@/Components/CameraDeviceList.vue'
+import Layout from '@/Layouts/Layout.vue'
 import { useStore } from '@/Stores/cameras'
 import { reactive, onMounted } from 'vue';
 
@@ -87,8 +88,7 @@ onMounted(() => {
 </script>
 
 <template>
-
-  <div class="bg-zinc-900 min-h-screen h-full pt-2 text-white">
+  <Layout>
     <div class="px-2 flex">
       <button onclick="history.back()" class="py-2 px-3 bg-zinc-700 rounded"><i class="fa-solid fa-arrow-left mx-1"></i> Back</button>
       <div class="ml-5 pt-1.5 text-2xl tracking-wide">{{props.data.ip}}:{{props.data.port}}</div>
@@ -127,5 +127,5 @@ onMounted(() => {
         <UserTable />
       </div>
     </div>
-  </div>
+  </Layout>
 </template>
