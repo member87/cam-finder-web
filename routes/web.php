@@ -17,7 +17,7 @@ use App\Http\Controllers\CameraController;
 |
 */
 
-Route::get('/', [CameraController::class, "index"]);
+Route::get('/', [CameraController::class, "index"])->name("index");
 Route::get('/view/{id}', [CameraController::class, "show"])->name('view.camera');
 
 

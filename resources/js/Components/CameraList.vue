@@ -8,7 +8,7 @@ console.log(store.data.links.filter((v, i) => i > 0 && i < store.data.links.leng
 </script>
 
 <template>
-  <div class="w-full max-w-screen-sm sm:max-w-none p-4 overflow-scroll">
+  <div class="w-full max-w-screen-sm sm:max-w-none p-4 overflow-x-scroll md:overflow-x-auto">
     <table class="w-full text-sm text-left text-gray-500">
         <thead class="text-xs text-gray-200 uppercase bg-neutral-700">
             <tr>
@@ -41,7 +41,7 @@ console.log(store.data.links.filter((v, i) => i > 0 && i < store.data.links.leng
     </table>
 
 
-    <div class="flex justify-end mt-5 max-w-screen-sm sm:max-w-none overflow-scroll relative h-12">
+    <div class="flex justify-end mt-5 max-w-screen-sm sm:max-w-none overflow-x-scroll sm:overflow-x-auto relative h-12">
       <nav class="w-full sm:w-auto absolute z-10 inline-flex rounded-md shadow-sm -space-x-px right-0 top-0" aria-label="Pagination">
         <a :href="store.data.prev_page_url" class="relative bg-zinc-900 inline-flex items-center px-2 py-2 rounded-l-md border border-neutral-600 bg-white font-medium text-zinc-500 hover:bg-gray-50">
           <span class="sr-only">Previous</span>

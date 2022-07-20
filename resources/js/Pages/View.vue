@@ -82,7 +82,9 @@ async function makeRequest(url) {
 
 onMounted(() => {
     store.map.setView([props.data.lat, props.data.long], 10);
+
   })
+
 
 
 </script>
@@ -90,7 +92,7 @@ onMounted(() => {
 <template>
   <Layout>
     <div class="px-2 flex">
-      <button onclick="history.back()" class="py-2 px-3 bg-zinc-700 rounded"><i class="fa-solid fa-arrow-left mx-1"></i> Back</button>
+      <button :onclick="`document.referrer.startsWith(window.location.origin) ? history.back() : window.location.href = '${route('index')}'`" class="py-2 px-3 bg-zinc-700 rounded"><i class="fa-solid fa-arrow-left mx-1"></i> Back</button>
       <div class="ml-5 pt-1.5 text-2xl tracking-wide">{{props.data.ip}}:{{props.data.port}}</div>
     </div>
     <div class="flex flex-col w-full lg:flex-row">
