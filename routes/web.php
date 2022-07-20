@@ -18,6 +18,7 @@ use App\Http\Controllers\CameraController;
 */
 
 Route::get('/', [CameraController::class, "index"])->name("index");
+Route::get('/search/{query}', [CameraController::class, "search"])->name("search");
 Route::get('/view/{id}', [CameraController::class, "show"])->name('view.camera');
 
 
@@ -25,4 +26,6 @@ Route::get('/view/{id}', [CameraController::class, "show"])->name('view.camera')
 Route::post('/api/xml2json/', [CameraController::class, "xml2json"])->name('api.xml2json');
 Route::post('/api/request/', [CameraController::class, "makeRequest"])->name('api.request');
 Route::post('/api/snapshot/', [CameraController::class, "snapshot"])->name('api.snapshot');
+
+Route::get('/api/cameras/{query?}', [CameraController::class, "cameras"])->name('api.cameras');
 

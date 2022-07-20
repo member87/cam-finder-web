@@ -31,7 +31,7 @@ function showOnMap(lat, long) {
         {{data.source}}
       </td>
       <td class="px-6 py-4">
-        {{data.code}}
+        {{ (data.city != 'N/A') ? `${data.city},` : '' }} {{data.code}}
       </td>
       <td class="px-6 py-4 text-right">
         <div class="rounded">

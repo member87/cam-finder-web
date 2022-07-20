@@ -1,14 +1,51 @@
 <script setup>
 import CameraListItem from '@/Components/CameraListItem.vue';
 import { useStore } from '@/Stores/cameras'
+import { defineExpose } from 'vue'
 const store = useStore()
 
+let timeoutId = 0;
 
-console.log(store.data.links.filter((v, i) => i > 0 && i < store.data.links.length - 1))
+
+
+const makeRequest = async (val) => {
+  let resp =  await axios.get(route('api.cameras', val))
+
+  store.cameraList = resp.data.data;
+  store.data = resp.data
+
+  if(val != '')
+    window.history.pushState(document.title, document.title, `/search/${encodeURI(val)}`);
+  else
+    window.history.pushState(document.title, document.title, route('index'));
+  }
+
+const processKey = (event) =>
+{
+  const value = document.getElementById('search').value;
+  
+  clearTimeout(timeoutId)
+
+  timeoutId = setTimeout(() => {
+    makeRequest(value)
+  }, 1000)
+
+}
+
+
+
+
 </script>
 
 <template>
   <div class="w-full max-w-screen-sm sm:max-w-none p-4 overflow-x-scroll md:overflow-x-auto">
+    
+    <div class="w-full mb-2">
+      <input class="bg-zinc-700 p-2 rounded" id="search" :oninput="processKey" placeholder="Search..." />
+      <button :onclick="processKey" class="py-2 px-4 bg-primary rounded ml-2">Search</button>
+    </div>
+
+
     <table class="w-full text-sm text-left text-gray-500">
         <thead class="text-xs text-gray-200 uppercase bg-neutral-700">
             <tr>
@@ -53,7 +90,7 @@ console.log(store.data.links.filter((v, i) => i > 0 && i < store.data.links.leng
   
 
         <div v-for="page in store.data.links.filter((v, i) => i > 0 && i < store.data.links.length - 1)">
-          <a :href="page.url" class="border-neutral-600 hover:bg-neutral-800 relative inline-flex items-center px-4 py-2 border font-medium" :class='{"bg-neutral-700 text-gray-400": page.active, "bg-zinc-900 text-gray-600": !page.active}' v-if="page.label != '...'"> {{page.label}} </a>
+          <a :href="`?page=${page.label}`" class="border-neutral-600 hover:bg-neutral-800 relative inline-flex items-center px-4 py-2 border font-medium" :class='{"bg-neutral-700 text-gray-400": page.active, "bg-zinc-900 text-gray-600": !page.active}' v-if="page.label != '...'"> {{page.label}} </a>
 
 
           <span href="#" class="border-neutral-600 text-gray-500 relative inline-flex items-center px-4 py-2 border font-medium bg-zinc-900" v-if="page.label == '...'"> {{page.label}} </span>

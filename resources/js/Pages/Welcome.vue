@@ -10,7 +10,6 @@ const props = defineProps({
   data: Object,
 });
 
-console.log(props.data);
 store.cameraList = props.data["data"];
 store.data = props.data;
 
