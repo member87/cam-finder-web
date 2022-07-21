@@ -31,6 +31,7 @@ class UpdateDatabase extends Command
     {
       $file = Storage::get('cameras.csv');
       $cams = array_slice(explode("\n", $file), 1);
+      Camera::truncate();
       foreach($cams as $cam) {
         $cam = explode(',', $cam);
         Camera::create([

@@ -13,7 +13,7 @@ class CameraController extends Controller
     $camera = Camera::where('count', '!=', 'N/A');
 
     return Inertia::render('Welcome', [
-      'data' => $camera->paginate(25)
+      'data' => $camera->orderBy('count', 'DESC')->paginate(25)
     ]);
   }
 
@@ -41,7 +41,7 @@ class CameraController extends Controller
         ->orWhere('city', 'like', '%' . $query . '%')
         ->orWhere('source', 'like', '%' . $query . '%')
         ->orWhere('ip', 'like', '%' . $query . '%');
-    })->paginate(25);
+    })->orderBy('count', 'DESC')->paginate(25);
   }
 
   public function show($id)
