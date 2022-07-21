@@ -35,7 +35,7 @@ export default {
         this.markers.addLayer(L.marker([el["lat"], el["long"]], {
             icon: this.darkIcon, 
           })
-          .bindPopup(`${el["ip"]}:${el["port"]}`))
+          .bindPopup(`<a href="${route('view.camera', el.id)}">${el["ip"]}:${el["port"]}</a>`))
       } catch (err) {
           console.log(err)
           console.log(el)
@@ -47,7 +47,7 @@ export default {
     },
   mounted() {
     
-    this.store.map =  L.map('map').setView([0, 0], 4);
+    this.store.map =  L.map('map').setView([0, 0], 2);
 
     var tiles = L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', {
   		maxZoom: 19,
