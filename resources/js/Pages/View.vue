@@ -109,7 +109,7 @@ onMounted(() => {
                   <button @click="close" class="bg-primary text-xl px-4 py-2 rounded shadow absolute right-0 m-2"><i class="fa-solid fa-xmark mr-1"></i> close</button>
                 </div>
               </div>
-          </template>
+            </template>
           </ViewInfoBox>
         </div>
     </div>

@@ -37,6 +37,7 @@ class CameraController extends Controller
 
     })->where(function ($q) use ($query) {
       $q->where('country', 'like', '%' . $query . '%')
+        ->orWhere('code', 'like', '%' . $query . '%')
         ->orWhere('city', 'like', '%' . $query . '%')
         ->orWhere('source', 'like', '%' . $query . '%')
         ->orWhere('ip', 'like', '%' . $query . '%');
