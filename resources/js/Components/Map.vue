@@ -16,7 +16,34 @@ export default {
       } 
 
   },
+  computed: {
+    cameraList() {
+        return this.store.cameraList
+      }
+    },
+  watch: {
+    cameraList: function() {
+      this.populateMakers()
+      }
+    },
   methods: {
+    populateMakers: function() {
+
+    this.markers.clearLayers();
+    this.store.cameraList.forEach(el => {
+      try {
+        this.markers.addLayer(L.marker([el["lat"], el["long"]], {
+            icon: this.darkIcon, 
+          })
+          .bindPopup(`${el["ip"]}:${el["port"]}`))
+      } catch (err) {
+          console.log(err)
+          console.log(el)
+        }
+    })
+
+    this.markers.addTo(this.store.map)
+      }
     },
   mounted() {
     
@@ -28,7 +55,7 @@ export default {
   	}).addTo(this.store.map);
     
 
-    const darkIcon = new L.divIcon({
+    this.darkIcon = new L.divIcon({
       html: `<i class="fa-solid fa-location-pin fa-2xl text-primary"></i>`,
       iconSize: [20, 20],
       className: "bg-transparent"
@@ -41,20 +68,9 @@ export default {
     	  }
       });
 
+    this.populateMakers()
 
-    this.store.cameraList.forEach(el => {
-      try {
-        this.markers.addLayer(L.marker([el["lat"], el["long"]], {
-            icon: darkIcon, 
-          })
-          .bindPopup(`${el["ip"]}:${el["port"]}`))
-      } catch (err) {
-          console.log(err)
-          console.log(el)
-        }
-    })
 
-    this.markers.addTo(this.store.map)
   },
 }
 
