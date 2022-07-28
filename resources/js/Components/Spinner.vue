@@ -1,26 +1,18 @@
 <script setup>
-
-import { defineProps } from 'vue';
+import { defineProps } from "vue";
 
 let props = defineProps({
-    color: String,
-  })
+  color: String,
+});
 
 let col = "#333";
-if (props.color)
-  col = props.color;
-
-
+if (props.color) col = props.color;
 </script>
 <template>
-
-<div class="lds-dual-ring"></div>
-
-
+  <div class="lds-dual-ring"></div>
 </template>
 
 <style scoped>
-
 .lds-dual-ring {
   display: inline-block;
   width: 50px;
@@ -44,7 +36,4 @@ if (props.color)
     transform: rotate(360deg);
   }
 }
-
-
 </style>
-
