@@ -18,13 +18,18 @@ generate csv file using [cam-finder](https://github.com/member87/cam-finder)
 ```sh
 git clone https://github.com/member87/cam-finder-web/
 cd cam-finder-web
+
 composer install
 npm install && npm run build
 touch database/database.sqlite
 
+mv .env.example .env
+php artisan key:generate
+
+# edit .env and fill in details
 # move the previously generated csv file to 'storage/app/cameras.csv'
 
-php artisan database:update
+php artisan database:update # may take a little bit
 php artisan serve
 
 http://localhost:8000
