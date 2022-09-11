@@ -1,6 +1,6 @@
 # Introduction
 
-This is a website to view ACTi cameras that have the defualt login deatils (admin, 123456). You can get a list of all accessible cameras by using [cam-finder](https://github.com/member87/cam-finder) which will generate a .csv file. The csv file can the be imported and shown in the website. 
+This is a website to view ACTi cameras that have the default login details (admin, 123456). You can get a list of all accessible cameras by using [cam-finder](https://github.com/member87/cam-finder) which will generate a .csv file. The csv file can be imported and shown in the website. 
 
 #### You can view an online version here [here](https://cam-finder.member87.uk)
 
